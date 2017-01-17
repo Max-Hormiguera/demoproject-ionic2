@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Projects List</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <button ion-item *ngFor="let project of projects" (click)="itemTapped($event, project)">
+      <!-- <ion-icon [name]="item.icon" item-left></ion-icon> -->
+      {{project.name}}
+      <p class="item-note">
+        {{project.desc}}
+      </p>
+    </button>
+  </ion-list>
+  <div *ngIf="selectedItem" padding>
+    You navigated here from <b>{{selectedItem.name}}</b>
+  </div>
+</ion-content>
+
+<ion-footer>
+	<ion-toolbar>
+		<form (ngSubmit)="addProject()" #addProjForm="ngForm">
+			<ion-item>
+				<ion-input type="text" placeholder="Project Name" name="newprojectname" [(ngModel)]="newproject.name" required></ion-input>			
+			</ion-item>
+			<ion-item>
+				<ion-input type="text" placeholder="Project Description" name="newprojectdesc" [(ngModel)]="newproject.desc"></ion-input>			
+			</ion-item>
+			<ion-item>				
+				<button ion-button item-right>Add New</button>
+			</ion-item>
+		</form>
+		<button ion-button item-left color="danger" ng-click="clearStorage()">Clear Storage</button>
+	</ion-toolbar>
+</ion-footer>
